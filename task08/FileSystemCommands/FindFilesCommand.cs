@@ -1,8 +1,12 @@
 using System;
 using System.IO;
 using CommandLib;
+using task07;
 
 namespace FileSystemCommands;
+
+[DisplayName("Поиск файлов по маске")]
+[Version(1, 0)]
 
 public class FindFilesCommand : ICommand
 {

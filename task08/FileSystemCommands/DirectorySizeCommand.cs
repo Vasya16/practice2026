@@ -2,8 +2,12 @@
 using System.IO;
 using System.Linq;
 using CommandLib;
+using task07;
 
 namespace FileSystemCommands;
+
+[DisplayName("Вычисление размера каталога")]
+[Version(1, 0)]
 
 public class DirectorySizeCommand : ICommand
 {
