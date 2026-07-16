@@ -97,6 +97,17 @@ internal class Program
                 }
             }
         }
+        catch (ReflectionTypeLoadException ex)
+        {
+            Console.WriteLine("Ошибка: Не удалось загрузить некоторые типы из сборки.");
+            foreach (Exception loaderException in ex.LoaderExceptions)
+            {
+                if (loaderException != null)
+                {
+                    Console.WriteLine($"   - Причина: {loaderException.Message}");
+                }
+            }
+        }
         catch (Exception ex)
         {
             Console.WriteLine($"Произошла критическая ошибка при анализе рефлексии: {ex.Message}");
