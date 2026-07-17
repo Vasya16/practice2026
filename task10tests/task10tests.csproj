@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\task10\task10.csproj" />
+    <ProjectReference Include="..\task10\PluginEngine\PluginEngine.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace task10;
+﻿namespace PluginEngine;
 
 public interface ICommand
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Xunit;
 using task10;
+using PluginEngine;
 
 namespace task10tests;
 

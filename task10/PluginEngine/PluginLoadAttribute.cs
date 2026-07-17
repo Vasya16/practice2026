@@ -1,6 +1,6 @@
 using System;
 
-namespace task10;
+namespace PluginEngine;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class PluginLoadAttribute : Attribute

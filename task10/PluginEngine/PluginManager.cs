@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 
-namespace task10;
+namespace PluginEngine;
 
 public class PluginInfo
 {
