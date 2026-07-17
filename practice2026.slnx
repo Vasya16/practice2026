@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/task11/">
+    <Project Path="task11/DynamicCompiler/DynamicCompiler.csproj" />
+  </Folder>
   <Project Path="task01/task01.csproj" />
   <Project Path="task01tests/task01tests.csproj" />
+  <Project Path="task11tests/task11tests.csproj" />
 </Solution>
