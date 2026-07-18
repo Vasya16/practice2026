@@ -33,7 +33,7 @@ public class ServerTests
         server.Join();
         Assert.True(wasExecuted);
     }
-    
+
     [Fact]
     public void Run_Task18_Performance_Graph()
     {
@@ -80,6 +80,55 @@ public class ServerTests
         
         plt.SavePng("task18_performance.png", 600, 400);
         Assert.True(System.IO.File.Exists("task18_performance.png"));
+    }
+
+    [Fact]
+    public void Simulation_Task19_ShouldRunFiveCommandsThreeTimes()
+    {
+        List<double> tickCounts = new List<double> { 5, 10, 15, 20 };
+        List<double> totalTimes = new List<double>();
+
+        foreach (int maxTicks in tickCounts)
+        {
+            var scheduler = new RoundRobinScheduler();
+            var server = new ServerThread(scheduler);
+            
+            lock (TestCommand.Timeline) { TestCommand.Timeline.Clear(); }
+            TestCommand.GlobalSw = System.Diagnostics.Stopwatch.StartNew();
+            
+            server.Start();
+            
+            for (int i = 1; i <= 5; i++)
+            {
+                server.Enqueue(new TestCommand(i, scheduler));
+            }
+
+            while (true)
+            {
+                lock (TestCommand.Timeline)
+                {
+                    if (TestCommand.Timeline.Count >= 5 * maxTicks) break;
+                }
+                Thread.Sleep(10);
+            }
+
+            double elapsed = TestCommand.GlobalSw.Elapsed.TotalMilliseconds;
+            totalTimes.Add(elapsed);
+
+            server.Enqueue(new HardStopCommand(server));
+            server.Join();
+        }
+
+        var plt = new ScottPlot.Plot();
+        plt.Title("Зависимость времени от количества тиков");
+        plt.XLabel("Тиков на команду");
+        plt.YLabel("Время (мс)");
+        
+        plt.Add.Scatter(tickCounts.ToArray(), totalTimes.ToArray());
+        plt.Axes.AutoScale();
+        
+        plt.SavePng("task19_gantt.png", 600, 400);
+        Assert.True(System.IO.File.Exists("task19_gantt.png"));
     }
 }
 
